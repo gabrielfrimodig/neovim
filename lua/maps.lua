@@ -13,6 +13,7 @@ vim.api.nvim_set_keymap('n', 'sv', ':vsplit<CR><C-w>w', { noremap = true, silent
 -- Space to remove highlights
 vim.keymap.set("n", "<Space>", ":noh<CR>", {silent = true})
 
+-- Movement
 vim.keymap.set("n", "<C-h>", "<C-w>h", {silent = true})
 vim.keymap.set("n", "<C-j>", "<C-w>j", {silent = true})
 vim.keymap.set("n", "<C-k>", "<C-w>k", {silent = true})
@@ -24,10 +25,15 @@ vim.api.nvim_set_keymap('n', '<A-Down>', ':resize -2<CR>', {noremap = true, sile
 vim.api.nvim_set_keymap('n', '<A-Right>', ':vertical resize +2<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<A-Left>', ':vertical resize -2<CR>', {noremap = true, silent = true})
 
--- replace
+-- Don't yank on delete
+vim.api.nvim_set_keymap('n', 'x', '"_x', {noremap = true})
+vim.api.nvim_set_keymap('n', 'dd', '"_dd', {noremap = true})
+vim.api.nvim_set_keymap('v', 'd', '"_d', {noremap = true})
+
+-- Replace all instances of a word
 vim.api.nvim_set_keymap('n', '<leader>rp', ':%s/\\<<C-r><C-w>\\>//g<Left><Left>', { noremap = true, silent = false })
 
--- paste
+-- Paste
 vim.api.nvim_set_keymap('n', '<leader>p', "<cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('\"0p', true, false, true), 'n', false)<CR>", { noremap = true, silent = true })
 
 -- Buffer Navigation
@@ -55,7 +61,7 @@ vim.keymap.set('n', '<leader>h4', function() require('harpoon.ui').nav_file(4) e
 -- cmp
 vim.api.nvim_set_keymap('i', '<C-e>', "cmp.mapping.close()<CR>", {expr = true, noremap = true})
 
--- gitsigns 
+-- Gitsigns
 vim.api.nvim_set_keymap('n', '<leader>g', "<cmd>lua require('gitsigns').toggle_signs()<CR>", { noremap = true, silent = true })
 
 -- Telescope
