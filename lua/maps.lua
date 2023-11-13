@@ -6,6 +6,10 @@ vim.g.mapleader = ' '
 -- ii to exit insert mode
 vim.keymap.set("i", "ii", "<Esc>", {silent = true})
 
+-- Split window
+vim.api.nvim_set_keymap('n', 'ss', ':split<CR><C-w>w', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'sv', ':vsplit<CR><C-w>w', { noremap = true, silent = true })
+
 -- Space to remove highlights
 vim.keymap.set("n", "<Space>", ":noh<CR>", {silent = true})
 
@@ -14,6 +18,7 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", {silent = true})
 vim.keymap.set("n", "<C-k>", "<C-w>k", {silent = true})
 vim.keymap.set("n", "<C-l>", "<C-w>l", {silent = true})
 
+-- Resize
 vim.api.nvim_set_keymap('n', '<A-Up>', ':resize +2<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<A-Down>', ':resize -2<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<A-Right>', ':vertical resize +2<CR>', {noremap = true, silent = true})
