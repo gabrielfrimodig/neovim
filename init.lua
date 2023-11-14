@@ -9,5 +9,9 @@ require('plugins/lualine');
 require('plugins/lsp_config');
 require('gitsigns').setup()
 require('ibl').setup()
-require('plugins/cmp_config');
 require('nvim-tree').setup()
+require'colorizer'.setup()
+require('plugins/cmp_config');
+require('mason').setup()
+require('plugins/mason_lspconfig')
+

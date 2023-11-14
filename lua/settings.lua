@@ -1,6 +1,7 @@
 -- lua/settings.lua
 
 -- General settings
+vim.notify              = require('notify')
 vim.o.cmdheight         = 1
 vim.o.expandtab         = true
 vim.o.clipboard         = "unnamedplus"

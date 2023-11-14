@@ -57,6 +57,15 @@ return require('packer').startup(function(use)
     tag = 'nightly'
   }
 
+  -- Mason
+  use 'williamboman/mason.nvim'
+
+  -- Mason lspconfig
+  use 'williamboman/mason-lspconfig.nvim'
+
+  -- Web Devicons
+  use 'nvim-tree/nvim-web-devicons'
+
   -- harpoon 
   use 'ThePrimeagen/harpoon'
 
@@ -77,12 +86,33 @@ return require('packer').startup(function(use)
     },
     config = function() require('gitsigns').setup() end
   }
- 
+
+  -- Markdown
+  use 'preservim/vim-markdown'
+
+  -- Markdown preview
+  use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
+  -- Vimtex
+  use 'lervag/vimtex'
+
   -- nvim-autopairs
   use {
   	"windwp/nvim-autopairs",
       config = function() require("nvim-autopairs").setup {} end
   }
+
+  -- Notify
+  use 'rcarriga/nvim-notify'
+
+  -- Devicons
+  use 'ryanoasis/vim-devicons'
+
+  -- colorizer
+  use 'norcalli/nvim-colorizer.lua'
 
   -- Blankline
   use "lukas-reineke/indent-blankline.nvim"
