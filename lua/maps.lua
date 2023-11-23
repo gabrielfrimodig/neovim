@@ -25,11 +25,6 @@ vim.api.nvim_set_keymap('n', '<A-Down>', ':resize -2<CR>', {noremap = true, sile
 vim.api.nvim_set_keymap('n', '<A-Right>', ':vertical resize +2<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<A-Left>', ':vertical resize -2<CR>', {noremap = true, silent = true})
 
--- Don't yank on delete
-vim.api.nvim_set_keymap('n', 'x', '"_x', {noremap = true})
-vim.api.nvim_set_keymap('n', 'dd', '"_dd', {noremap = true})
-vim.api.nvim_set_keymap('v', 'd', '"_d', {noremap = true})
-
 -- Replace all instances of a word
 vim.api.nvim_set_keymap('n', '<leader>rp', ':%s/\\<<C-r><C-w>\\>//g<Left><Left>', { noremap = true, silent = false })
 
