@@ -120,6 +120,33 @@ return require('packer').startup(function(use)
   -- Nightfox
   use 'EdenEast/nightfox.nvim'
 
+  -- Gruvbox
+  use 'morhetz/gruvbox'
+
+  -- Nightfly
+  use "bluz71/vim-nightfly-colors"
+
+  -- Tokyonight
+  use "folke/tokyonight.nvim"
+
+  -- Catppuccino
+  use { "catppuccin/nvim", as = "catppuccin" }
+
+  -- Kanagawa
+  use "rebelot/kanagawa.nvim"
+
+  -- Dracula
+  use 'Mofiqul/dracula.nvim'
+
+  -- Onedark
+  use "joshdick/onedark.vim"
+
+  -- Apprentice
+  use "romainl/Apprentice"
+
+  -- Solarized
+  use "shaunsingh/solarized.nvim"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
