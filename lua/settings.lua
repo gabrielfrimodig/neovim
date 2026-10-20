@@ -1,52 +1,52 @@
--- lua/settings.lua
+-- Core options only: plugin setup lives in lua/specs/.
+local opt = vim.opt
+opt.termguicolors = true
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = false
+opt.wrap = false
+opt.mouse = "a"
+opt.clipboard = "unnamedplus"
+opt.completeopt = { "menu", "menuone", "noselect" }
+opt.pumheight = 10
+opt.expandtab = true
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.smarttab = true
+opt.autoindent = true
+opt.smartindent = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.hlsearch = true
+opt.incsearch = true
+opt.swapfile = false
+opt.backup = false
+opt.writebackup = false
+opt.undofile = true
+opt.undodir = vim.fn.stdpath("data") .. "/undo"
+vim.fn.mkdir(vim.o.undodir, "p")
+opt.undolevels = 10000
+opt.undoreload = 10000
+opt.shada = "'1000,<50,s10,h"
+opt.errorbells = false
+opt.cmdheight = 1
+opt.laststatus = 3
+opt.showtabline = 2
+opt.conceallevel = 0
+opt.foldcolumn = "0"
+opt.foldnestmax = 20
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.backspace = { "indent", "eol", "start" }
+opt.splitright = true
+opt.scrolloff = 8
+opt.timeoutlen = 400
+opt.updatetime = 100
+opt.lazyredraw = false
 
--- General settings
-vim.notify              = require('notify')
-vim.o.cmdheight         = 1
-vim.o.expandtab         = true
-vim.o.clipboard         = "unnamedplus"
-vim.o.completeopt       = "menu,menuone,noselect"
-vim.o.cursorline        = false
-vim.o.number            = true
-vim.o.wrap              = false
-vim.o.smartindent       = true
-vim.o.smartcase         = true
-vim.o.ignorecase        = true
-vim.o.swapfile          = false
-vim.o.autoindent        = true
-vim.o.undofile          = true
-vim.o.undodir           = vim.fn.expand('~') .. '/.local/share/nvim/undo'
-vim.o.undolevels        = 10000
-vim.o.undoreload        = 10000
-vim.o.errorbells        = false
-vim.o.tabstop           = 4
-vim.o.softtabstop       = 4
-vim.o.shiftwidth        = 4
-vim.o.hlsearch          = true
-vim.o.backup            = false
-vim.o.incsearch         = true
-vim.o.errorbells        = false
-vim.o.writebackup       = false
-vim.o.laststatus        = 3
-vim.o.smarttab          = true
-vim.o.foldcolumn        = "0"
-vim.o.foldnestmax       = 0
-vim.o.emoji             = false
-vim.o.mouse             = "a"
-vim.o.encoding          = "utf-8"
-vim.o.fileencoding      = "utf-8"
-vim.o.viminfo           = "'1000"
-vim.o.backspace         = "indent,eol,start"
-vim.o.conceallevel      = 0
-vim.o.foldlevel         = 99
-vim.o.foldlevelstart    = 99
-vim.o.pumheight         = 10
-vim.o.lazyredraw        = true
-vim.o.splitright        = true
-vim.o.scrolloff         = 8
-vim.o.timeoutlen        = 200
-vim.o.updatetime        = 100
-vim.o.showtabline       = 2
-vim.wo.number           = true
-vim.wo.relativenumber   = true
-
+-- Optional private tool installation; no global PATH or Homebrew changes.
+local tools = vim.fn.stdpath("data") .. "/tools/bin"
+if vim.fn.isdirectory(tools) == 1 then
+    vim.env.PATH = tools .. ":" .. vim.env.PATH
+end

@@ -1,90 +1,182 @@
-# Neovim Configuration
+# Neovim
 
-<div align="center">
-    <img width="760px" src="https://i.imgur.com/71UH5Y9.png" />
-</div>
+Personal Lua-based Neovim configuration with file and text search, completion, language server support, Git indicators, and tools for Markdown and LaTeX. **lazy.nvim** manages plugins; `lazy-lock.json` records their exact versions.
 
-This repository contains my personal [Neovim](https://github.com/neovim/neovim) configuration.
+Tested with **Neovim 0.12.6 on macOS (Apple Silicon)**. Other platforms have not been verified. The [keyboard cheat sheet](docs/neovim-cheatsheet.md) covers the configured mappings and can also be copied into Obsidian.
 
-## Plugins
+## Features
 
-- [Packer](https://github.com/wbthomason/packer.nvim): A package manager for Neovim.
+| Area | Plugins and behavior |
+|---|---|
+| Search | Telescope for files, text, buffers, help, and File Browser |
+| Navigation | NvimTree and four Harpoon shortcuts |
+| Completion | nvim-cmp with LSP, LuaSnip, paths, buffer words, and command-line completion |
+| Language support | nvim-lspconfig through Neovim's `vim.lsp.config` and `vim.lsp.enable` |
+| Syntax | Treesitter highlighting, text objects, and function navigation |
+| Git and history | Gitsigns and Undotree with persistent undo history |
+| Writing | vim-markdown, Markdown Preview, and VimTeX |
+| Editing | Autopairs and Which-key for discovering shortcuts |
+| Appearance | lualine, indent-blankline, Colorizer, nvim-notify, and nvim-web-devicons |
 
-### LSP and Autocompletion
+## Requirements
 
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig): Essential configurations for the built-in Neovim LSP.
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): Main autocompletion engine for Neovim.
-- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp): LSP source for nvim-cmp.
-- [cmp-buffer](https://github.com/hrsh7th/cmp-buffer), [cmp-path](https://github.com/hrsh7th/cmp-path), [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline): Autocompletion for buffer, path, and command line.
-- [cmp-path](https://github.com/hrsh7th/cmp-path): Path completions for nvim-cmp.
-- [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline): Command line completions for nvim-cmp.
+- **Neovim 0.12+** for this configuration. Use the tested version above as a reference; future plugin updates may change requirements.
+- **Git** and an internet connection for installation and updates.
+- **ripgrep** (`rg`) for Telescope text search. **fd** is optional for file search.
+- **tree-sitter CLI 0.26.1+**, a **C compiler**, **curl**, and **tar** to install Treesitter parsers. Install the CLI through a system package manager or official binaries, rather than npm, as required by the Treesitter plugin.
+- A terminal with **true color** support. A **Nerd Font** is recommended for icons.
 
-### Snippets
-
-- [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip): Snippet completions for nvim-cmp.
-- [LuaSnip](https://github.com/L3MON4D3/LuaSnip): A Lua-based snippet engine.
-
-### Syntax Highlighting
-
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Advanced syntax highlighting.
-
-### File Browsing and Searching
-
-- [Telescope](https://github.com/nvim-telescope/telescope.nvim): A highly extendable fuzzy finder over lists.
-- [Telescope File Browser](https://github.com/nvim-telescope/telescope-file-browser.nvim): File browsing extension for Telescope.
-- [nvim-tree](https://github.com/kyazdani42/nvim-tree.lua): A file explorer for Neovim.
-
-### Mason
-
-- [mason.nvim](https://github.com/williamboman/mason.nvim): Package manager for external tooling.
-- [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim): Integrates Mason with nvim-lspconfig.
-
-### Markdown and LaTeX
-- [vim-markdown](https://github.com/preservim/vim-markdown): Markdown syntax highlighting and matching rules.
-- [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim): Markdown preview in the browser.
-- [vimtex](https://github.com/lervag/vimtex): A modern Vim and Neovim filetype plugin for LaTeX files.
-
-### Utilities
-
-- [Harpoon](https://github.com/ThePrimeagen/harpoon): Quick file navigation and workspace management.
-- [Lualine](https://github.com/nvim-lualine/lualine.nvim): A fast and customizable status line.
-- [undotree](https://github.com/mbbill/undotree): Visualize your undo history.
-- [Gitsigns](https://github.com/lewis6991/gitsigns.nvim): Git integration for buffers.
-- [nvim-autopairs](https://github.com/windwp/nvim-autopairs): Automatic insertion of pairs (brackets, quotes).
-- [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim): Adds indentation guides to all lines.
-- [Nightfox](https://github.com/EdenEast/nightfox.nvim): A stylish and easy-on-the-eyes color scheme.
-- [nvim-notify](https://github.com/rcarriga/nvim-notify): A fancy, configurable notification manager for Neovim.
-- [nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua): A plugin for color highlighting.
-- [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): Developer icons for Neovim.
-- [vim-devicons](https://github.com/ryanoasis/vim-devicons): Icon support for various Neovim plugins.
-
-### Theme
-
-- [Nightfox](https://github.com/EdenEast/nightfox.nvim): A stylish and easy-on-the-eyes color scheme.
-
-## Key Mappings
-
-Key mappings are set up for efficiency and ease of navigation, editing, and management of the Neovim environment. Here are some highlights:
-
-- `ii`: Exit insert mode.
-- `<Space>`: Clear search highlights.
-- `Ctrl+h/j/k/l`: Navigate between splits.
-- `Alt+Arrow Keys`: Resize splits.
-- `<leader>rp`: Replace the word under the cursor throughout the file.
-- `<leader>p`: Paste the last yanked content.
-- `<leader>e`: Toggle Nvim Tree.
-- `<leader>u`: Toggle UndoTree.
-- `ff/fg/fb/fh/fv`: Various Telescope commands for finding files, live grep, etc.
-- `<leader>g`: Toggle Gitsigns.
+Language servers, LaTeX tools, and PDF viewers must be installed separately as needed. They are not included in this repository.
 
 ## Installation
 
-`Neovim >= 0.5`
+### 1. Clone the configuration
 
-```bash
+Move any existing Neovim configuration aside and back up its data first. Then clone into Neovim's configuration directory, normally `~/.config/nvim` on macOS/Linux:
+
+```sh
 git clone https://github.com/gabrielfrimodig/neovim.git ~/.config/nvim
+nvim
 ```
 
-## Contributions
+If `XDG_CONFIG_HOME` is set, use `$XDG_CONFIG_HOME/nvim` instead.
 
-Feel free to fork, submit issues, or pull requests to enhance this configuration!
+Lazy bootstraps itself on first launch and installs missing plugins. Wait for installation to finish, then restart Neovim. Use `:Lazy` to inspect status and build errors. Packer is not required.
+
+### 2. Install parsers
+
+Parser binaries are local installation files and are **not included** in Git. The configuration enables available parsers but does not automatically install missing languages. To install the same set used during verification, run inside Neovim:
+
+```vim
+:TSInstall lua vim vimdoc query python javascript typescript tsx html css json markdown markdown_inline java bash c cpp rust yaml toml
+```
+
+Wait for installation to finish, then reopen the file or restart Neovim. Add languages with `:TSInstall language`.
+
+### 3. Install language servers
+
+The following configurations are enabled when their executable is available in Neovim's `PATH` at startup:
+
+| Language | LSP configuration | Executable |
+|---|---|---|
+| Lua | `lua_ls` | `lua-language-server` |
+| Python | `pyright` | `pyright-langserver` |
+| JavaScript / TypeScript | `ts_ls` | `typescript-language-server` |
+| C / C++ | `clangd` | `clangd` |
+| Rust | `rust_analyzer` | `rust-analyzer` |
+| LaTeX | `texlab` | `texlab` |
+| HTML | `html` | `vscode-html-language-server` |
+| CSS | `cssls` | `vscode-css-language-server` |
+| JSON | `jsonls` | `vscode-json-language-server` |
+| Bash | `bashls` | `bash-language-server` |
+| Java | `jdtls` | `jdtls` |
+
+Install servers for the languages you use, including their runtime dependencies. The TypeScript server requires TypeScript; Java requires a compatible JDK. HTML, CSS, and JSON servers are available through `vscode-langservers-extracted`.
+
+Restart Neovim after installation and run `:checkhealth vim.lsp`. Finding an executable enables its configuration; attachment also depends on the file type and project root. Mason is not included, and language servers are not downloaded automatically.
+
+### 4. Check the installation
+
+```vim
+:checkhealth
+:checkhealth lazy
+:checkhealth nvim-treesitter
+:checkhealth vim.lsp
+```
+
+## Essential shortcuts
+
+`<leader>` is **Space** and `<localleader>` is **backslash** (`\`). Press Space and wait to open the Which-key menu. Unless noted otherwise, mappings apply in normal mode.
+
+| Keys | Action |
+|---|---|
+| `Space fk` / `Space ?` | Search all mappings / show local mappings |
+| `ff` / `fg` / `fb` / `fh` | Search files / text / buffers / help |
+| `Space e` / `Space fe` | NvimTree / Telescope File Browser |
+| `Space ha` / `Space hm` | Add file to Harpoon / open Harpoon menu |
+| `Space h1` … `Space h4` | Jump to Harpoon file 1 … 4 |
+| `ss` / `sv` | Split horizontally / vertically |
+| `Ctrl+h/j/k/l` | Move between windows |
+| `Tab` / `Shift+Tab` | Next / previous buffer |
+| `ii` in insert mode | Return to normal mode |
+| `Esc` | Clear search highlighting |
+| `Space u` | Show undo history |
+| `gd` / `gr` / `K` | Definition / references / documentation through an attached LSP |
+| `Space rn` / `Space ca` | Rename symbol / code actions through LSP |
+| `Space cf` | Format through LSP if supported by the server |
+| `]d` / `[d` / `Space cd` | Next diagnostic / previous diagnostic / details |
+| `]h` / `[h` / `Space hp` | Next Git hunk / previous Git hunk / preview |
+| `Space hs` / `Space hr` | Stage / **reset** current Git hunk |
+| `Space mp` | Toggle Markdown preview in a Markdown buffer |
+| `Space ft` | Select a color scheme for the current session |
+
+LSP mappings are installed when a server attaches. Buffer-local plugin mappings can override global ones: `]h` navigates headings in Markdown, and `Ctrl+k` shows file information in NvimTree. The `ff`/`fg` and `ss`/`sv` mappings also affect Vim's built-in `f` and `s` commands.
+
+See the [complete cheat sheet](docs/neovim-cheatsheet.md) for completion, snippets, Treesitter text objects, plugin-specific mappings, and VimTeX commands.
+
+## Markdown and LaTeX
+
+**Markdown Preview** downloads/installs its preview executable through the plugin's build step. Open a Markdown file and press `Space mp`. If installation failed, open `:Lazy`, select `markdown-preview.nvim`, and run its build step with `gb`. A working browser is required to display the preview.
+
+**VimTeX** requires a TeX distribution with `latexmk` and a suitable PDF viewer. In TeX files, use `\ll` to compile, `\lv` to view the PDF, and `\le` to show errors. Texlab is separate, optional LSP support; it does not replace the TeX distribution.
+
+## Themes
+
+Included theme packages: Nightfox, Gruvbox, Nightfly, Tokyo Night, Catppuccin, Kanagawa, Dracula, OneDark, Apprentice, and Solarized.
+
+The local **Seashell** theme is loaded when `~/dev/seashell.nvim` exists. Its source is not included in this repository. Without that directory, the configuration does not select a specific color scheme, so Neovim's default is used. Choose an installed scheme with `Space ft` or `:colorscheme name`. For a persistent choice, configure the theme in `lua/specs/ui.lua` and disable the Seashell specification if it would otherwise override your selection.
+
+## Structure
+
+```text
+init.lua                     Leader keys and loading order
+lazy-lock.json               Locked plugin versions
+lua/
+  settings.lua               Editor options without plugin dependencies
+  keymaps.lua                Global keyboard mappings
+  config/
+    lazy.lua                 Lazy bootstrap and settings
+  specs/
+    completion.lua           cmp, completion sources, and LuaSnip
+    editor.lua               Navigation, Git, Undotree, Autopairs, Which-key
+    lsp.lua                  Language servers and LspAttach mappings
+    treesitter.lua           Parsers, highlighting, and text objects
+    ui.lua                   Status line, notifications, colors, icons, themes
+    writing.lua              Markdown and LaTeX
+docs/
+  neovim-cheatsheet.md        Detailed reference for GitHub and Obsidian
+examples/                    Sample files for manual checks
+```
+
+Loading order: leader keys → editor options → Lazy/plugins → global mappings. Add plugins to the appropriate file in `lua/specs/`; Lazy imports all specifications in that directory.
+
+## Maintenance
+
+| Command | Purpose |
+|---|---|
+| `:Lazy` | Inspect installed plugins and their status |
+| `:Lazy check` | Check for updates |
+| `:Lazy update` | Update plugins and the lockfile |
+| `:Lazy restore` | Restore plugins to the versions in the current lockfile |
+| `:TSUpdate` | Update installed parsers |
+| `:messages` | Show errors and other messages |
+| `:verbose nmap <Space>e` | Show where a mapping was defined |
+
+Commit `lazy-lock.json` alongside the configuration. To return to older plugin versions, restore the corresponding older lockfile first, then run `:Lazy restore`. Restart Neovim after major updates. Automatic update checking is disabled.
+
+Treesitter and textobjects use `main` and their new APIs. Harpoon intentionally uses `master` and its older API. Lazy is the only plugin manager; when migrating an older installation, remove active Packer loaders and packages from the runtime paths.
+
+## Local data and limitations
+
+- Plugins and parsers live under Neovim's data directory (`:lua print(vim.fn.stdpath("data"))`), normally `~/.local/share/nvim` on macOS/Linux. They do not come with a clone of this repository.
+- Undo history is stored in the data directory's `undo/` folder, which is created as needed.
+- If the data directory contains `tools/bin`, it is added to `PATH` **for the Neovim process only**. The verified machine had tree-sitter CLI 0.27.1 there; new installations must install the CLI separately.
+- LuaSnip handles LSP snippets, but no separate collection of predefined snippets is included.
+- Formatting is manual through LSP. No general-purpose formatter, format-on-save behavior, debugger, or test integration is configured.
+- Markdown support does not include Obsidian-specific wikilink or backlink features.
+- `examples/` contains samples, not an automated test suite. The Python sample has its own data-processing dependencies and external input files; it is not an installation script. Its Swedish language model identifier is intentional sample functionality.
+- Verification covered startup, parsing six sample files, file navigation, and a clangd connection. Not every language server or visual PDF/browser preview has been verified.
+
+## Repository language
+
+Use English for documentation, comments, user-facing descriptions, and new file or directory names. Use English for commit messages, issues, and pull requests as well. Preserve identifiers required by external APIs, language models, or data formats.
