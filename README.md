@@ -1,8 +1,12 @@
 # Neovim
 
-Personal Lua-based Neovim configuration with file and text search, completion, language server support, Git indicators, and tools for Markdown and LaTeX. **lazy.nvim** manages plugins; `lazy-lock.json` records their exact versions.
+My personal Lua-based Neovim configuration. **lazy.nvim** manages plugins; `lazy-lock.json` records their exact versions.
 
-Tested with **Neovim 0.12.6 on macOS (Apple Silicon)**. Other platforms have not been verified. The [keyboard cheat sheet](docs/neovim-cheatsheet.md) covers the configured mappings and can also be copied into Obsidian.
+Used on **Neovim 0.12.6 on macOS (Apple Silicon)**. Other platforms have not been verified.
+
+<div align="center">
+    <img width="760px" src="https://i.imgur.com/71UH5Y9.png" />
+</div>
 
 ## Features
 
@@ -114,17 +118,9 @@ LSP mappings are installed when a server attaches. Buffer-local plugin mappings 
 
 See the [complete cheat sheet](docs/neovim-cheatsheet.md) for completion, snippets, Treesitter text objects, plugin-specific mappings, and VimTeX commands.
 
-## Markdown and LaTeX
-
-**Markdown Preview** downloads/installs its preview executable through the plugin's build step. Open a Markdown file and press `Space mp`. If installation failed, open `:Lazy`, select `markdown-preview.nvim`, and run its build step with `gb`. A working browser is required to display the preview.
-
-**VimTeX** requires a TeX distribution with `latexmk` and a suitable PDF viewer. In TeX files, use `\ll` to compile, `\lv` to view the PDF, and `\le` to show errors. Texlab is separate, optional LSP support; it does not replace the TeX distribution.
-
 ## Themes
 
-Included theme packages: Nightfox, Gruvbox, Nightfly, Tokyo Night, Catppuccin, Kanagawa, Dracula, OneDark, Apprentice, and Solarized.
-
-The local **Seashell** theme is loaded when `~/dev/seashell.nvim` exists. Its source is not included in this repository. Without that directory, the configuration does not select a specific color scheme, so Neovim's default is used. Choose an installed scheme with `Space ft` or `:colorscheme name`. For a persistent choice, configure the theme in `lua/specs/ui.lua` and disable the Seashell specification if it would otherwise override your selection.
+The theme [Seashell]((https://github.com/gabrielfrimodig/seashell.nvim)) is loaded when `~/dev/seashell.nvim` exists. Its source is a seperate repository.  Choose an installed scheme with `Space ft` or `:colorscheme name`. For a persistent choice, configure the theme in `lua/specs/ui.lua` and disable the Seashell specification if it would otherwise override your selection.
 
 ## Structure
 
@@ -176,7 +172,3 @@ Treesitter and textobjects use `main` and their new APIs. Harpoon intentionally 
 - Markdown support does not include Obsidian-specific wikilink or backlink features.
 - `examples/` contains samples, not an automated test suite. The Python sample has its own data-processing dependencies and external input files; it is not an installation script. Its Swedish language model identifier is intentional sample functionality.
 - Verification covered startup, parsing six sample files, file navigation, and a clangd connection. Not every language server or visual PDF/browser preview has been verified.
-
-## Repository language
-
-Use English for documentation, comments, user-facing descriptions, and new file or directory names. Use English for commit messages, issues, and pull requests as well. Preserve identifiers required by external APIs, language models, or data formats.
